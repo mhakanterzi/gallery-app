@@ -4,7 +4,7 @@ import { Card, CardBody, CardTitle,Button } from 'react-bootstrap'
 function MainMenu(){
 
     return(
-        <Card className="mb-3">
+        <Card>
         <Card.Body>
           <Card.Title>Main Menu</Card.Title>
           <div className="button-Menu">

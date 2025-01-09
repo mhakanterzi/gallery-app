@@ -32,7 +32,7 @@ function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
   };
 
   return (
-    <Card className="mb-3">
+    <Card>
       <Card.Body>
         <Card.Title>Login</Card.Title>
         <Form onSubmit={handleLogin}>

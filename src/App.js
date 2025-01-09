@@ -20,7 +20,7 @@ function App() {
     <Container className="App">
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home"></Navbar.Brand>
-        <Nav className="ml-auto">
+        <Nav >
           {isLoggedIn ? (
             <>
               <Navbar.Text>Signed in as: {user}</Navbar.Text>

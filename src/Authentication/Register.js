@@ -27,7 +27,7 @@ function Register() {
 }
 
   return (
-    <Card className='mb-3'>
+    <Card>
       <CardBody>
         <CardTitle>Register</CardTitle>
         <Form onSubmit={handleRegister}>
