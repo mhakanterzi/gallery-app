@@ -1,0 +1,42 @@
+body {
+  background-color: #474747;
+  color: white;
+}
+
+.App {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #474747;
+  color: white;
+  max-width: 400px;
+  max-height: 500px;
+  margin: auto;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.button-container button {
+  width: 48%;
+}
+
+.button-Menu {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  height: 90px;
+}
+
+.button-Menu button {
+  width: 160px;
+  height: 60px;
+}
