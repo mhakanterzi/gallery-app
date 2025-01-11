@@ -11,26 +11,31 @@ function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:1337/api/auth/local', {
         identifier,  
         password,
       });
+  
       setIsLoggedIn(true);
+  
+      const userId = response.data.user.id; 
+      localStorage.setItem("userId", userId);
+  
       if(identifier.endsWith('@gallery.com')){
-        setIsAdmin(true)
-      }
-      else{
+        setIsAdmin(true);
+      } else {
         setIsAdmin(false);
       }
+  
       setUser(identifier);
-        alert('Login Succesfuly')
+      alert('Login Successful');
     } catch (error) {
       alert('Login Failed. Check email or password...');
     }
   };
-
+  
   return (
     <Card>
       <CardBody>
