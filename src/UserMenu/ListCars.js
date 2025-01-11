@@ -1,9 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, CardTitle } from "react-bootstrap";
+import { Button, Card, CardBody, CardTitle, Form } from "react-bootstrap";
 import axios from "axios";
 
 function ListCars({ onBackToMenu }) {
   const [cars, setCars] = useState([]);
+  const [showDateInput, setShowDateInput] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedCar, setSelectedCar] = useState(null);
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleOpenDateInput = (carId) => {
+    setShowDateInput(true);
+    setSelectedCar(carId);
+  };
+
+  const handleConfirmTestDrive = async () => {
+    if (!selectedDate) {
+      alert("Please select a date for the test drive.");
+      return;
+    }
+
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("Please log in to schedule a test drive.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:1337/api/bookings", {
+        data: {
+          users_permissions_user: userId,
+          car: selectedCar,
+          book_status: "Pending",
+          booking_date: selectedDate,
+        },
+      });
+      alert("Test drive scheduled successfully!");
+      setShowDateInput(false);
+      setSelectedDate("");
+    } catch (error) {
+      console.error("Error scheduling test drive:", error.response?.data || error.message);
+      alert("Failed to schedule test drive. Please try again.");
+    }
+  };
 
   useEffect(() => {
     const listCar = async () => {
@@ -18,21 +60,13 @@ function ListCars({ onBackToMenu }) {
     listCar();
   }, []);
 
-  const StockCarButton = ({ stock }) => {
-    return stock === 0 ? (
-      <Button variant="danger">Want a Car</Button>
-    ) : (
-      <Button variant="primary">Test Drive</Button>
-    );
-  };
-
   const handleAddToFavorites = async (carId) => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
       alert("Please log in to add cars to favorites.");
       return;
     }
-  
+
     try {
       const response = await axios.post("http://localhost:1337/api/favorites", {
         data: {
@@ -47,7 +81,16 @@ function ListCars({ onBackToMenu }) {
       alert("Failed to add car to favorites. Please try again.");
     }
   };
-  
+
+  const StockCarButton = ({ stock, carId }) => {
+    return stock === 0 ? (
+      <Button variant="danger">Want a Car</Button>
+    ) : (
+      <Button variant="primary" onClick={() => handleOpenDateInput(carId)}>
+        Test Drive
+      </Button>
+    );
+  };
 
   return (
     <Card style={{ width: "90%", maxWidth: "50%", margin: "auto", padding: "20px", marginTop: "20px" }}>
@@ -73,7 +116,7 @@ function ListCars({ onBackToMenu }) {
                 <div style={{ flex: 1, textAlign: "center" }}>{car.Stock}</div>
                 <div style={{ flex: 1, textAlign: "center" }}>{car.Price}</div>
                 <div style={{ flex: 1, textAlign: "center" }}>
-                  <StockCarButton stock={car.Stock} />
+                  <StockCarButton stock={car.Stock} carId={car.documentId}/>
                 </div>
                 <div style={{ flex: 1, textAlign: "center" }}>
                   <Button variant="success" onClick={() => handleAddToFavorites(car.documentId)}>
@@ -84,6 +127,25 @@ function ListCars({ onBackToMenu }) {
             </li>
           ))}
         </ul>
+        {showDateInput && (
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+            <Form.Group>
+              <Form.Label>Select a date for the test drive:</Form.Label>
+              <Form.Control
+                type="date"
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              style={{ marginTop: "10px" }}
+              onClick={handleConfirmTestDrive}
+            >
+              Confirm Test Drive
+            </Button>
+          </div>
+        )}
         <Button onClick={onBackToMenu} variant="secondary" style={{ marginTop: "20px" }}>
           Back To Main Menu
         </Button>
