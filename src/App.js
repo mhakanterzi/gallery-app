@@ -3,7 +3,7 @@ import Login from './Authentication/Login';
 import Register from './Authentication/Register';
 import MainMenu from './Menu/MainMenu';
 import AdminMenu from './Menu/AdminMenu'
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, NavbarBrand, NavbarText } from 'react-bootstrap';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,11 +19,11 @@ function App() {
   return (
     <Container className="App">
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home"></Navbar.Brand>
+        <NavbarBrand href="#home"></NavbarBrand>
         <Nav >
           {isLoggedIn ? (
             <>
-              <Navbar.Text>Signed in as: {user}</Navbar.Text>
+              <NavbarText>Signed in as: {user}</NavbarText>
               <Button variant="outline-light" onClick={LogOut}>Logout</Button>
               <Button variant='outline-light'>Settings</Button>
             </>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card,CardBody,CardTitle, Form,FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Register from './Register';
 import axios from 'axios';
 
@@ -33,27 +33,27 @@ function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
 
   return (
     <Card>
-      <Card.Body>
-        <Card.Title>Login</Card.Title>
+      <CardBody>
+        <CardTitle>Login</CardTitle>
         <Form onSubmit={handleLogin}>
-          <Form.Group controlId="formIdenidier">
-            <Form.Label>Email or username</Form.Label>
-            <Form.Control
+          <FormGroup controlId="formIdenidier">
+            <FormLabel>Email or username</FormLabel>
+            <FormControl
               type="text"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
               required
             />
-          </Form.Group>
-          <Form.Group controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
+          </FormGroup>
+          <FormGroup controlId="formPassword">
+            <FormLabel>Password</FormLabel>
+            <FormControl
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </Form.Group>
+          </FormGroup>
           <div className="button-container">
             <Button variant="primary" type="submit">
               Login
@@ -68,7 +68,7 @@ function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
           </div>
         </Form>
         {showRegister && <Register setShowRegister={setShowRegister} />}
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 }

@@ -29,8 +29,8 @@ function AdminMenu(){
 
     return(
         <Card>
-        <Card.Body>
-          <Card.Title>Main Menu</Card.Title>
+        <CardBody>
+          <CardTitle>Main Menu</CardTitle>
           <div className="button-Menu">
             <Button onClick={HandleCarMenu}>
               Cars Menu
@@ -42,7 +42,7 @@ function AdminMenu(){
             <Button variant='primary' onClick={handleRequestMenu} style={{height:'60px', width:'160px', marginLeft:'95px' }} >
               Requests
             </Button>
-        </Card.Body>
+        </CardBody>
       </Card>
     );
 }
