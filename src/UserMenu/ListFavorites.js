@@ -58,27 +58,38 @@ function ListFavorites({ onBackToMenu }) {
               </tr>
             </thead>
             <tbody>
-              {favorites.map((favorite) => {
-                const car = favorite.car;
-                return (
-                  <tr key={favorite.id}>
-                    <td>{car.Brand}</td>
-                    <td>{car.Model}</td>
-                    <td>{car.Year}</td>
-                    <td>${car.Price}</td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleRemoveFavorite(favorite.documentId)}
-                      >
-                        Remove
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
+  {favorites.map((favorite) => {
+    const car = favorite.car;
+
+    if (!car) {
+      return (
+        <tr key={favorite.id}>
+          <td colSpan="5" style={{ textAlign: "center", color: "red" }}>
+            Car details are missing or unavailable.
+          </td>
+        </tr>
+      );
+    }
+
+    return (
+      <tr key={favorite.id}>
+        <td>{car.Brand}</td>
+        <td>{car.Model}</td>
+        <td>{car.Year}</td>
+        <td>${car.Price}</td>
+        <td>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={() => handleRemoveFavorite(favorite.documentId)}
+          >
+            Remove
+          </Button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
           </Table>
         ) : (
           <p style={{ textAlign: "center" }}>You have no favorites yet.</p>
