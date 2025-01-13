@@ -11,7 +11,11 @@ function TestDriveRequests({ onBackToMenu }) {
         const response = await axios.get(
           "http://localhost:1337/api/bookings?populate=*"
         );
-        setTestDriveRequests(response.data.data || []);
+        // Yalnızca "Pending" durumunda olanları filtreliyoruz
+        const pendingRequests = response.data.data.filter(
+          (request) => request.book_status === "Pending"
+        );
+        setTestDriveRequests(pendingRequests || []);
       } catch (error) {
         console.error("Error fetching test drive requests:", error);
         alert("Failed to fetch test drive requests.");
@@ -23,7 +27,7 @@ function TestDriveRequests({ onBackToMenu }) {
 
   const handleAcceptRequest = async (documentId) => {
     try {
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:1337/api/bookings/${documentId}`,
         {
           data: { book_status: "Accepted" },
@@ -31,6 +35,7 @@ function TestDriveRequests({ onBackToMenu }) {
       );
 
       alert("Test drive request accepted!");
+      // Kabul edilen talebi listeden çıkarıyoruz
       setTestDriveRequests((prev) =>
         prev.filter((request) => request.documentId !== documentId)
       );
@@ -61,7 +66,7 @@ function TestDriveRequests({ onBackToMenu }) {
           Test Drive Requests
         </CardTitle>
         {testDriveRequests.length === 0 ? (
-          <p style={{ textAlign: "center" }}>No test drive requests available.</p>
+          <p style={{ textAlign: "center" }}>No pending test drive requests available.</p>
         ) : (
           <ul style={{ listStyleType: "none", padding: 0 }}>
             {testDriveRequests.map((request) => {

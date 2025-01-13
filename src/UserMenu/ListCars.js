@@ -42,10 +42,27 @@ function ListCars({ onBackToMenu }) {
       setShowDateInput(false);
       setSelectedDate("");
     } catch (error) {
-      console.error("Error scheduling test drive:", error.response?.data || error.message);
       alert("Failed to schedule test drive. Please try again.");
     }
   };
+
+  const handleConfirmStockRequest = async (carId)=>{
+    const userId = localStorage.getItem("userId")
+
+    try{
+      await axios.post('http://localhost:1337/api/car-requests',{
+        data: {
+          users_permissions_user: userId,
+          car: carId,
+          request_status:'Pending',
+        },
+      })
+      alert('Stock Request Send To Admin')
+    }
+    catch(error){
+        alert('Please try again later...')
+    }
+  }
 
   useEffect(() => {
     const listCar = async () => {
@@ -84,7 +101,7 @@ function ListCars({ onBackToMenu }) {
 
   const StockCarButton = ({ stock, carId }) => {
     return stock === 0 ? (
-      <Button variant="danger">Want a Car</Button>
+      <Button variant="danger" onClick={()=>handleConfirmStockRequest(carId)}>Want a Car</Button>
     ) : (
       <Button variant="primary" onClick={() => handleOpenDateInput(carId)}>
         Test Drive

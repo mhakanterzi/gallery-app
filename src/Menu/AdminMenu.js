@@ -2,10 +2,12 @@ import React,{useState} from "react";
 import { Card, CardBody, CardTitle,Button } from 'react-bootstrap'
 import AdminCarMenu from "../AdminMenus/AdminCarMenu";
 import RequestMenu from "../AdminMenus/RequestMenu";
+import StockRequest from "../Requests/StockRequest";
 
 function AdminMenu(){
     const[showCarMenu, setShowCarMenu]= useState(false)
     const[showRequestMenu, setShowRequestMenu] = useState(false)
+    const[showStock, setShowStock]=useState(false)
 
     const HandleCarMenu =() =>{
         setShowCarMenu(true)
@@ -27,6 +29,16 @@ function AdminMenu(){
         return <RequestMenu onBackToMenu={requestBack}/>;
     }
 
+    const handleStockMenu=()=>{
+      setShowStock(true)
+    }
+    const handleStockBack=() =>{
+      setShowStock(false)
+    }
+    if(showStock){
+      return<StockRequest onBackToMenu={handleStockBack} />
+    }
+
     return(
         <Card>
         <CardBody>
@@ -35,7 +47,7 @@ function AdminMenu(){
             <Button onClick={HandleCarMenu}>
               Cars Menu
             </Button>
-            <Button >
+            <Button onClick={handleStockMenu}>
               Update Stock
             </Button>
           </div>
