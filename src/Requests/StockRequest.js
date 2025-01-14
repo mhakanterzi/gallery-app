@@ -33,10 +33,6 @@ function StockRequest({ onBackToMenu }) {
         }
       );
 
-      await axios.delete(
-        `http://localhost:1337/api/car-requests/${selectedCar.documentId}`
-      );
-
       alert("Stock successfully updated!");
 
       setStockRequests((prev) =>
