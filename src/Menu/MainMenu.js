@@ -2,10 +2,12 @@ import React,{useState} from "react";
 import { Card, CardBody, CardTitle,Button } from 'react-bootstrap'
 import ListCars from "../UserMenu/ListCars";
 import ListFavorites from '../UserMenu/ListFavorites'
+import Services from "../UserMenu/Service";
 
 function MainMenu(){
   const [ListCar, setListCar]= useState(false);
   const[ListFavorite, setListFavorite] =useState(false)
+  const[ListServices, setServices] = useState(false)
 
   const handleListCar =()=>{
     setListCar(true)
@@ -27,10 +29,20 @@ function MainMenu(){
     return <ListFavorites onBackToMenu={handleBackFavorites}/>
   }
 
+  const handleListService=()=>{
+    setServices(true)
+  }
+  const ListBack=()=>{
+    setServices(false)
+  }
+  if(ListServices){
+    return <Services onBackToMenu={ListBack}/>
+  }
+
     return(
         <Card>
-        <Card.Body>
-          <Card.Title>Main Menu</Card.Title>
+        <CardBody>
+          <CardTitle>Main Menu</CardTitle>
           <div className="button-Menu">
             <Button onClick={handleListCar}>
               List Cars
@@ -40,14 +52,14 @@ function MainMenu(){
             </Button>
           </div>
           <div className="button-Menu">
-            <Button>
+            <Button onClick={handleListService}>
               Services
             </Button>
             <Button >
               About
             </Button>
           </div>
-        </Card.Body>
+        </CardBody>
       </Card>
     );
 }
