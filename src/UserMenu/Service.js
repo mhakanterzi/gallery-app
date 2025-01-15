@@ -43,7 +43,7 @@ function Service({onBackToMenu}){
                         />
                     </FormGroup>
                     <FormGroup controlId="Model">
-                        <FormLabel>About Car</FormLabel>
+                        <FormLabel>Maintenance Type</FormLabel>
                         <FormControl
                         type="text"
                         value={AboutCar}

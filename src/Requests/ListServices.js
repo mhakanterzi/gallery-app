@@ -35,11 +35,7 @@ function ListServices({ onBackToMenu }) {
 
             // Update the services list
             setServices((prevServices) =>
-                prevServices.map((service) =>
-                    service.id === documentId
-                        ? { ...service, attributes: { ...service.attributes, request_status: "Finished" } }
-                        : service
-                )
+                prevServices.filter((service) => service.documentId !== documentId)
             );
         } catch (error) {
             console.error("Error updating request status:", error);
@@ -54,7 +50,7 @@ function ListServices({ onBackToMenu }) {
 
             // Remove the deleted service from the list
             setServices((prevServices) =>
-                prevServices.filter((service) => service.id !== documentId)
+                prevServices.filter((service) => service.documentId !== documentId)
             );
         } catch (error) {
             console.error("Error deleting request:", error);

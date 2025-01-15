@@ -11,7 +11,7 @@ function StockRequest({ onBackToMenu }) {
     const fetchStockRequests = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1337/api/car-requests?populate=*"
+          `http://localhost:1337/api/car-requests?filters[request_status][$eq]=Pending&populate=*`
         );
         setStockRequests(response.data.data || []);
       } catch (error) {
@@ -32,6 +32,12 @@ function StockRequest({ onBackToMenu }) {
           data: { Stock: newStock },
         }
       );
+
+      await axios.put(`http://localhost:1337/api/car-requests/${selectedCar.documentId}`,
+        {
+          data:{request_status:'Updated'}
+        }
+      )
 
       alert("Stock successfully updated!");
 

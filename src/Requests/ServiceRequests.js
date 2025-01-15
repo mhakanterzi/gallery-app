@@ -46,7 +46,7 @@ function ServiceRequests({ onBackToMenu }) {
                     <tr>
                         <th>#</th>
                         <th>Brand</th>
-                        <th>About Car</th>
+                        <th>Maintenance Type</th>
                         <th>Request Date</th>
                         <th>Status</th>
                         <th>Actions</th>

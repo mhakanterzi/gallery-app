@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Card,CardBody, CardTitle, Button } from "react-bootstrap";
 import axios from "axios";
 
 function AboutServices({ onBackToMenu }) {
@@ -49,38 +49,34 @@ function AboutServices({ onBackToMenu }) {
         }
     };
 
-
-    return (
-        <div>
-            <h2>Service Requests</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Brand</th>
-                        <th>About Car</th>
-                        <th>Request Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {services.map((service, index) => (
-                        <tr key={service.id}>
-                            <td>{index + 1}</td>
-                            <td>{service.Brand || "N/A"}</td>
-                            <td>{service.AboutCar || "N/A"}</td>
-                            <td>{service.request_date || "N/A"}</td>
-                            <td>{service.request_status || "Pending"}</td>
-                            <td>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-            <Button onClick={onBackToMenu}>Return to Menu</Button>
+    return(
+    <Card style={{ width: "90%", maxWidth: "50%", margin: "auto", padding: "20px", marginTop: "20px" }}>
+      <CardBody>
+        <CardTitle style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: "bold" }}>Service Requests</CardTitle>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+          <div style={{ flex: 1, textAlign: "center" }}>Brand</div>
+          <div style={{ flex: 1, textAlign: "center" }}>Maintenance Type</div>
+          <div style={{ flex: 1, textAlign: "center" }}>Date</div>
+          <div style={{ flex: 1, textAlign: "center" }}>Status</div>
         </div>
-    );
+        <ul style={{ listStyleType: "none", padding: 0 }}>
+          {services.map((service) => (
+            <li key={service.id}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ flex: 1, textAlign: "center" }}>{service.Brand}</div>
+                <div style={{ flex: 1, textAlign: "center" }}>{service.AboutCar}</div>
+                <div style={{ flex: 1, textAlign: "center" }}>{service.request_date}</div>
+                <div style={{ flex: 1, textAlign: "center" }}>{service.request_status}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <Button onClick={onBackToMenu} variant="secondary" style={{ marginTop: "20px" }}>
+          Back To Main Menu
+        </Button>
+      </CardBody>
+    </Card>
+  );
 }
 
 export default AboutServices;

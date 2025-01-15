@@ -8,8 +8,10 @@ function StockRequest({ onBackToMenu }) {
   useEffect(() => {
     const fetchStockRequests = async () => {
       try {
+        const userId = localStorage.getItem("userId");
+
         const response = await axios.get(
-          "http://localhost:1337/api/car-requests?populate=*"
+          `http://localhost:1337/api/car-requests?populate=*&filters[users_permissions_user][id][$eq]=${userId}`
         );
         setStockRequests(response.data.data || []);
       } catch (error) {

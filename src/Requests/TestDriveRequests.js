@@ -9,13 +9,10 @@ function TestDriveRequests({ onBackToMenu }) {
     const fetchTestDriveRequests = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1337/api/bookings?populate=*"
+          "http://localhost:1337/api/bookings?populate=*&filters[book_status][$eq]=Pending"
         );
-        // Yalnızca "Pending" durumunda olanları filtreliyoruz
-        const pendingRequests = response.data.data.filter(
-          (request) => request.book_status === "Pending"
-        );
-        setTestDriveRequests(pendingRequests || []);
+
+        setTestDriveRequests(response.data.data);
       } catch (error) {
         console.error("Error fetching test drive requests:", error);
         alert("Failed to fetch test drive requests.");
@@ -35,6 +32,7 @@ function TestDriveRequests({ onBackToMenu }) {
       );
 
       alert("Test drive request accepted!");
+
       // Kabul edilen talebi listeden çıkarıyoruz
       setTestDriveRequests((prev) =>
         prev.filter((request) => request.documentId !== documentId)
@@ -70,8 +68,7 @@ function TestDriveRequests({ onBackToMenu }) {
         ) : (
           <ul style={{ listStyleType: "none", padding: 0 }}>
             {testDriveRequests.map((request) => {
-              const user = request?.users_permissions_user || {};
-              const car = request?.car || {};
+
               return (
                 <li key={request.id} style={{ marginBottom: "10px" }}>
                   <div
@@ -82,10 +79,10 @@ function TestDriveRequests({ onBackToMenu }) {
                     }}
                   >
                     <div>
-                      User: {user?.username || "Unknown User"}
+                      User: {request.users_permissions_user.username || "Unknown User"}
                     </div>
                     <div>
-                      Car: {car?.Brand || "Unknown Brand"} {car?.Model || ""}
+                      Car: {request.car.Brand || "Unknown Brand"} {request.car.Model || ""}
                     </div>
                     <Button
                       variant="success"
