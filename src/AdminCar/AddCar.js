@@ -25,7 +25,7 @@ function AddCar({onBackToMenu}){
         };
 
         try {
-            const response =await axios.post('http://34.38.235.50:1337/api/cars', CarData)
+            await axios.post('http://34.38.235.50:1337/api/cars', CarData)
             alert('Car Added Succesfult...')
         } catch (error) {
             alert('Error. Please Check İnformations.')

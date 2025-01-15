@@ -6,16 +6,14 @@ function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [showRegister, setShowRegister] = useState(false);
+  const [,setShowRegister] = useState(false);
 
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setMessage('');
 
     try {
-      const response = await axios.post('http://34.38.235.50:1337/api/auth/local/register', {
+      await axios.post('http://34.38.235.50:1337/api/auth/local/register', {
         username,  
         email,
         password,

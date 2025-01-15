@@ -23,31 +23,6 @@ function AboutServices({ onBackToMenu }) {
         fetchServices();
     }, []);
 
-    const handleUpdateStatus = async (documentId) => {
-        try {
-            await axios.put(
-                `http://34.38.235.50:1337/api/service-requests/${documentId}`,
-                {
-                    data: {
-                        request_status: "Finished",
-                    },
-                }
-            );
-            alert("Request Approved Successfully!");
-
-            setServices((prevServices) =>
-                prevServices.map((service) =>
-                    service.id === documentId
-                        ? { ...service, attributes: { ...service.attributes, request_status: "Finished" } }
-                        : service
-                )
-            );
-        } catch (error) {
-            console.error("Error updating request status:", error);
-            alert("Error updating request status.");
-        }
-    };
-
     return(
     <Card style={{ width: "90%", maxWidth: "50%", margin: "auto", padding: "20px", marginTop: "20px" }}>
       <CardBody>

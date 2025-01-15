@@ -110,7 +110,7 @@ function ListCars({ onBackToMenu }) {
   };
 
   return (
-    <Card style={{ width: "90%", maxWidth: "50%", margin: "auto", padding: "20px", marginTop: "20px" }}>
+<Card style={{ width: "90%", maxWidth: "50%", margin: "auto", padding: "20px", marginTop: "20px", minHeight: "800px" }}>
       <CardBody>
         <CardTitle style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: "bold" }}>All Cars</CardTitle>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
