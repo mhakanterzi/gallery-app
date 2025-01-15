@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
   const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('')
   const [showRegister, setShowRegister] = useState(false);
 
 
@@ -13,7 +13,7 @@ function Login({ setIsLoggedIn, setUser, setIsAdmin}) {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:1337/api/auth/local', {
+      const response = await axios.post('http://34.38.235.50:1337/api/auth/local', {
         identifier,  
         password,
       });

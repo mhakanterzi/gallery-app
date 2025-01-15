@@ -15,7 +15,7 @@ function Register() {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:1337/api/auth/local/register', {
+      const response = await axios.post('http://34.38.235.50:1337/api/auth/local/register', {
         username,  
         email,
         password,

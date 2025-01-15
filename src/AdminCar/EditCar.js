@@ -13,7 +13,7 @@ function EditCar({onBackToMenu}) {
 
 
     const fetchCars = async () => {
-            const response = await axios.get(`http://localhost:1337/api/cars`);
+            const response = await axios.get(`http://34.38.235.50:1337/api/cars`);
             setCars(response.data.data);
     }
 
@@ -53,7 +53,7 @@ function EditCar({onBackToMenu}) {
             },
         };
 
-            await axios.put(`http://localhost:1337/api/cars/${selectedCar.documentId}`, updatedCarData);
+            await axios.put(`http://34.38.235.50:1337/api/cars/${selectedCar.documentId}`, updatedCarData);
             alert("Car Updated Succesfuly.");
             fetchCars(); 
             handleCancelUpdate(); 

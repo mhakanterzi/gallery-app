@@ -30,7 +30,7 @@ function ListCars({ onBackToMenu }) {
     }
 
     try {
-      await axios.post("http://localhost:1337/api/bookings", {
+      await axios.post("http://34.38.235.50:1337/api/bookings", {
         data: {
           users_permissions_user: userId,
           car: selectedCar,
@@ -50,7 +50,7 @@ function ListCars({ onBackToMenu }) {
     const userId = localStorage.getItem("userId")
 
     try{
-      await axios.post('http://localhost:1337/api/car-requests',{
+      await axios.post('http://34.38.235.50:1337/api/car-requests',{
         data: {
           users_permissions_user: userId,
           car: carId,
@@ -67,7 +67,7 @@ function ListCars({ onBackToMenu }) {
   useEffect(() => {
     const listCar = async () => {
       try {
-        const response = await axios.get("http://localhost:1337/api/cars");
+        const response = await axios.get("http://34.38.235.50:1337/api/cars");
         setCars(response.data.data);
       } catch (error) {
         console.error("Error fetching cars:", error);
@@ -85,7 +85,7 @@ function ListCars({ onBackToMenu }) {
     }
 
     try {
-      const response = await axios.post("http://localhost:1337/api/favorites", {
+      const response = await axios.post("http://34.38.235.50:1337/api/favorites", {
         data: {
           users_permissions_user: userId,
           car: carId,

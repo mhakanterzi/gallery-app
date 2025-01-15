@@ -11,7 +11,7 @@ function StockRequest({ onBackToMenu }) {
         const userId = localStorage.getItem("userId");
 
         const response = await axios.get(
-          `http://localhost:1337/api/car-requests?populate=*&filters[users_permissions_user][id][$eq]=${userId}`
+          `http://34.38.235.50:1337/api/car-requests?populate=*&filters[users_permissions_user][id][$eq]=${userId}`
         );
         setStockRequests(response.data.data || []);
       } catch (error) {
@@ -60,10 +60,9 @@ function StockRequest({ onBackToMenu }) {
         </div>
         <ul style={{ listStyleType: "none", padding: 0 }}>
           {stockRequests.map((request) => {
-            const car = request.car; // car bilgisi burada alınıyor
+            const car = request.car; 
             const status =
-              car.Stock > 0 ? "Stock Updated" : "Pending"; // Stok durumuna göre mesaj
-
+              car.Stock > 0 ? "Stock Updated" : "Pending"; 
             return (
               <li key={request.id}>
                 <div

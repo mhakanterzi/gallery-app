@@ -11,7 +11,7 @@ function AboutServices({ onBackToMenu }) {
 
             try {
                 const response = await axios.get(
-                    `http://localhost:1337/api/service-requests?populate=*&filters[users_permissions_user][id][$eq]=${userId}`
+                    `http://34.38.235.50:1337/api/service-requests?populate=*&filters[users_permissions_user][id][$eq]=${userId}`
                 );
                 setServices(response.data.data);
             } catch (error) {
@@ -26,7 +26,7 @@ function AboutServices({ onBackToMenu }) {
     const handleUpdateStatus = async (documentId) => {
         try {
             await axios.put(
-                `http://localhost:1337/api/service-requests/${documentId}`,
+                `http://34.38.235.50:1337/api/service-requests/${documentId}`,
                 {
                     data: {
                         request_status: "Finished",
@@ -35,7 +35,6 @@ function AboutServices({ onBackToMenu }) {
             );
             alert("Request Approved Successfully!");
 
-            // Update the services list
             setServices((prevServices) =>
                 prevServices.map((service) =>
                     service.id === documentId

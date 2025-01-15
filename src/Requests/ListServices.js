@@ -9,7 +9,7 @@ function ListServices({ onBackToMenu }) {
         const fetchServices = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:1337/api/service-requests?populate=*"
+                    "http://34.38.235.50:1337/api/service-requests?populate=*"
                 );
                 setServices(response.data.data);
             } catch (error) {
@@ -24,7 +24,7 @@ function ListServices({ onBackToMenu }) {
     const handleUpdateStatus = async (documentId) => {
         try {
             await axios.put(
-                `http://localhost:1337/api/service-requests/${documentId}`,
+                `http://34.38.235.50:1337/api/service-requests/${documentId}`,
                 {
                     data: {
                         request_status: "Finished",
@@ -33,7 +33,6 @@ function ListServices({ onBackToMenu }) {
             );
             alert("Request Approved Successfully!");
 
-            // Update the services list
             setServices((prevServices) =>
                 prevServices.filter((service) => service.documentId !== documentId)
             );
@@ -45,10 +44,9 @@ function ListServices({ onBackToMenu }) {
 
     const handleDelete = async (documentId) => {
         try {
-            await axios.delete(`http://localhost:1337/api/service-requests/${documentId}`);
+            await axios.delete(`http://34.38.235.50:1337/api/service-requests/${documentId}`);
             alert("Request Deleted Successfully!");
 
-            // Remove the deleted service from the list
             setServices((prevServices) =>
                 prevServices.filter((service) => service.documentId !== documentId)
             );

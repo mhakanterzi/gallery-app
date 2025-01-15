@@ -22,7 +22,7 @@ function Service({onBackToMenu}){
         };
 
         try {
-            await axios.post('http://localhost:1337/api/service-requests', CarData)
+            await axios.post('http://34.38.235.50:1337/api/service-requests', CarData)
             alert('Car Added Succesfult...')
         } catch (error) {
             alert('Error. Please Check İnformations.')

@@ -15,7 +15,7 @@ function ListFavorites({ onBackToMenu }) {
 
       try {
         const response = await axios.get(
-          `http://localhost:1337/api/favorites?populate=car&filters[users_permissions_user][id][$eq]=${userId}`
+          `http://34.38.235.50:1337/api/favorites?populate=car&filters[users_permissions_user][id][$eq]=${userId}`
         );
         setFavorites(response.data.data || []);
       } catch (error) {
@@ -29,7 +29,7 @@ function ListFavorites({ onBackToMenu }) {
 
   const handleRemoveFavorite = async (documentId) => {
     try {
-      await axios.delete(`http://localhost:1337/api/favorites/${documentId}`);
+      await axios.delete(`http://34.38.235.50:1337/api/favorites/${documentId}`);
       alert("Favorite successfully removed!");
       setFavorites((prevFavorites) =>
         prevFavorites.filter((favorite) => favorite.documentId !== documentId)

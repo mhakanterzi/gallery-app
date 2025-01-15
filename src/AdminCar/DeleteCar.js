@@ -5,10 +5,9 @@ import axios from "axios";
 function DeleteCar({ onBackToMenu }) {
   const [cars, setCars] = useState([]);
 
-  // Araçları getirme fonksiyonu
   const fetchCars = async () => {
     try {
-      const response = await axios.get("http://localhost:1337/api/cars?populate=*");
+      const response = await axios.get("http://34.38.235.50:1337/api/cars?populate=*");
       setCars(response.data.data);
     } catch (error) {
       console.error("Error fetching cars:", error);
@@ -19,13 +18,11 @@ function DeleteCar({ onBackToMenu }) {
     fetchCars();
   }, []);
 
-  // Araç silme işlemi
   const handleDeleteCar = async (documentId) => {
     try {
-      // documentId'yi doğrudan URL'ye ekleyerek silme işlemini yap
-      await axios.delete(`http://localhost:1337/api/cars/${documentId}`);
+      await axios.delete(`http://34.38.235.50:1337/api/cars/${documentId}`);
       alert("Car Deleted Successfully.");
-      fetchCars(); // Güncellenmiş listeyi tekrar getir
+      fetchCars(); 
     } catch (error) {
       console.error("Error deleting car:", error);
       alert("Failed to delete the car. Please try again.");
@@ -59,7 +56,7 @@ function DeleteCar({ onBackToMenu }) {
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={() => handleDeleteCar(car.documentId)} // documentId'yi silme fonksiyonuna gönder
+                    onClick={() => handleDeleteCar(car.documentId)} 
                   >
                     Delete
                   </Button>

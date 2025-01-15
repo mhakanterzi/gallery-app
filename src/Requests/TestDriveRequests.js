@@ -9,7 +9,7 @@ function TestDriveRequests({ onBackToMenu }) {
     const fetchTestDriveRequests = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1337/api/bookings?populate=*&filters[book_status][$eq]=Pending"
+          "http://34.38.235.50:1337/api/bookings?populate=*&filters[book_status][$eq]=Pending"
         );
 
         setTestDriveRequests(response.data.data);
@@ -25,7 +25,7 @@ function TestDriveRequests({ onBackToMenu }) {
   const handleAcceptRequest = async (documentId) => {
     try {
       await axios.put(
-        `http://localhost:1337/api/bookings/${documentId}`,
+        `http://34.38.235.50:1337/api/bookings/${documentId}`,
         {
           data: { book_status: "Accepted" },
         }
@@ -33,7 +33,6 @@ function TestDriveRequests({ onBackToMenu }) {
 
       alert("Test drive request accepted!");
 
-      // Kabul edilen talebi listeden çıkarıyoruz
       setTestDriveRequests((prev) =>
         prev.filter((request) => request.documentId !== documentId)
       );

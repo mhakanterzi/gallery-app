@@ -11,7 +11,7 @@ function StockRequest({ onBackToMenu }) {
     const fetchStockRequests = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:1337/api/car-requests?filters[request_status][$eq]=Pending&populate=*`
+          `http://34.38.235.50:1337/api/car-requests?filters[request_status][$eq]=Pending&populate=*`
         );
         setStockRequests(response.data.data || []);
       } catch (error) {
@@ -27,13 +27,13 @@ function StockRequest({ onBackToMenu }) {
 
     try {
       await axios.put(
-        `http://localhost:1337/api/cars/${selectedCar.car.documentId}`,
+        `http://34.38.235.50:1337/api/cars/${selectedCar.car.documentId}`,
         {
           data: { Stock: newStock },
         }
       );
 
-      await axios.put(`http://localhost:1337/api/car-requests/${selectedCar.documentId}`,
+      await axios.put(`http://34.38.235.50:1337/api/car-requests/${selectedCar.documentId}`,
         {
           data:{request_status:'Updated'}
         }

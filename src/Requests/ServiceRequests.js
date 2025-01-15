@@ -8,7 +8,7 @@ function ServiceRequests({ onBackToMenu }) {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await axios.get('http://localhost:1337/api/service-requests?populate=*&filters[request_status][$eq]=Pending');
+                const response = await axios.get('http://34.38.235.50:1337/api/service-requests?populate=*&filters[request_status][$eq]=Pending');
                 setServices(response.data.data); 
             } catch (error) {
                 console.error("Error fetching service requests:", error);
@@ -21,14 +21,13 @@ function ServiceRequests({ onBackToMenu }) {
 
     const handleUpdateStatus = async (documentId) => {
         try {
-            await axios.put(`http://localhost:1337/api/service-requests/${documentId}`, {
+            await axios.put(`http://34.38.235.50:1337/api/service-requests/${documentId}`, {
                 data: {
                     request_status: "Progress",
                 },
             });
             alert("Request Approved Successfully!");
 
-            // Güncel listeyi filtrele
             setServices((prevServices) =>
                 prevServices.filter((service) => service.documentId !== documentId)
             );

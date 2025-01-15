@@ -11,7 +11,7 @@ function UserCars({ onBackToMenu }) {
         const userId = localStorage.getItem("userId");
 
         const response = await axios.get(
-          `http://localhost:1337/api/bookings?populate=car&filters[users_permissions_user][id][$eq]=${userId}`
+          `http://34.38.235.50:1337/api/bookings?populate=car&filters[users_permissions_user][id][$eq]=${userId}`
         );
 
         setUserCars(response.data.data);
